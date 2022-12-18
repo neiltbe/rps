@@ -1,5 +1,5 @@
 function getComputerChoice() {
-rng = Math.floor((Math.random() * 3))
+let rng = Math.floor((Math.random() * 3))
 if (rng == 0) {
     return "Rock"
 }
@@ -8,20 +8,21 @@ else if (rng == 1)
 else 
     return "Scissors"
 }
-computerChoice = getComputerChoice();
-playerChoice = "Rock";
+let computerChoice = getComputerChoice();
+let playerChoice = "Scissors";
+playerChoice = playerChoice.toUpperCase()
 function playRound(player, computer){
-    if (player == "Rock" && computer == "Paper"){
-        return "You Lose, PC Wins!"
+    if (player == "ROCK" && computer == "Paper"){
+        return "You Lose!"
     }
-    else if (player == "Rock" && computer == "Scissors"){
+    else if (player == "ROCK" && computer == "Scissors"){
         return "You win!"
     }
-    else if (player == "Scissors" && computer == "Rock"){
-        return "You win!"
+    else if (player == "SCISSORS" && computer == "Rock"){
+        return "You Lose!"
     }
-    else if (player == "Scissors" && computer == "Paper"){
-        return "You Lose, PC Wins!"
+    else if (player == "SCISSORS" && computer == "Paper"){
+        return "You Win!"
     }
     else {
         return "It's a draw!"
