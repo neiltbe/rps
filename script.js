@@ -1,54 +1,71 @@
+//creating variables to keep score
+let myScore = 0;
+let pcScore = 0;
+//function to get computers choice
 function getComputerChoice() {
-let rng = Math.floor((Math.random() * 3))
-if (rng == 0) {
-    return "Rock"
-}
-else if (rng == 1)
-    return "Paper"
-else 
-    return "Scissors"
-}
-const score = {
-    player: 0,
-    computer: 0
-};
-let computerChoice = getComputerChoice();
-let playerChoice = "Scissors";
-playerChoice = playerChoice.toUpperCase()
+    let rng = Math.floor((Math.random() * 3))
+    if (rng == 0) {
+        return "ROCK"
+    }
+    else if (rng == 1)
+        return "PAPER"
+    else 
+        return "SCISSORS"
+    }
+//creates a function we can use to decide who wins
 function playRound(player, computer){
-    if (player == "ROCK" && computer == "Paper"){
-        score.computer++;
-        return "You Lose!"
+    if (player == "ROCK" && computer == "PAPER"){
+        pcScore++;
+        computerScore.innerText = pcScore
+        return result.innerText= `Computer chose: ${computer}. You chose: ${player}. You Lose!`
     }
-    else if (player == "ROCK" && computer == "Scissors"){
-        score.player++;
-        return "You win!"
+    else if (player == "ROCK" && computer == "SCISSORS"){
+        myScore++;
+        playerScore.innerText = myScore
+        return result.innerText=`Computer chose: ${computer}. You chose: ${player}. You win!`
     }
-    else if (player == "SCISSORS" && computer == "Rock"){
-        score.computer++;
-        return "You Lose!"
+    else if (player == "SCISSORS" && computer == "ROCK"){
+        pcScore++;
+        computerScore.innerText = pcScore
+        return result.innerText=`Computer chose: ${computer}. You chose: ${player}. You Lose!`
     }
-    else if (player == "SCISSORS" && computer == "Paper"){
-        score.player++;
-        return "You Win!"
+    else if (player == "SCISSORS" && computer == "PAPER"){
+        myScore++;
+        playerScore.innerText = myScore
+        return result.innerText=`Computer chose: ${computer}. You chose: ${player}. You Win!`
+    }
+    else if (player == "PAPER" && computer == "ROCK"){
+        myScore++;
+        playerScore.innerText = myScore
+        return result.innerText=`Computer chose: ${computer}. You chose: ${player}. You Win!`
+    }
+    else if (player == "PAPER" && computer == "SCISSORS"){
+        pcScore++;
+        computerScore.innerText = pcScore
+        return result.innerText=`Computer chose: ${computer}. You chose: ${player}. You Lose!`
     }
     else {
-        return "It's a draw!"
+        return result.innerText=`Computer chose: ${computer}. You chose: ${player}. It's a draw!`
     }
 }
-function game(){
-    for (let i = 0; i < 5; i++){
-       let result = playRound(playerChoice, getComputerChoice());
-       console.log(result);
-    }
-    if (score.player > score.computer){
-        console.log(`"Player Wins with ${score.player} out of 5"`)
-    }
-    else if (score.player < score.computer){
-        console.log(`"Computer Wins with ${score.computer} out of 5"`)
-    }
-    else {
-        console.log(`"It's a draw with both computer scoring: ${score.computer} and player scoring: ${score.player}"`)
-    }
-    }
-game();
+function game(e){
+let computerChoice = getComputerChoice();
+playRound(e.target.id.toUpperCase(), computerChoice)
+if (myScore == 5) {
+victor.innerText = "YOU WON! Loading new game...."
+setTimeout(() => location.reload(), 3000)
+}
+else if (pcScore == 5){
+    victor.innerText = "COMPUTER WON! Loading new game..."
+    setTimeout(() => location.reload(), 3000)
+}
+}
+//add event listeners
+let victor = document.getElementById("victor")
+victor.style.color = "red";
+let playerScore = document.getElementById("playerScore")
+let computerScore = document.getElementById("computerScore")
+let result = document.querySelector("#result")
+let buttons = document.querySelectorAll('button');
+buttons.forEach(button => button.addEventListener('click', (e) => game(e)));
+
