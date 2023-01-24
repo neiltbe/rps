@@ -62,7 +62,7 @@ else if (pcScore == 5){
 }
 //add event listeners
 let victor = document.getElementById("victor")
-victor.style.color = "red";
+document.victor.style.color = "red";
 let playerScore = document.getElementById("playerScore")
 let computerScore = document.getElementById("computerScore")
 let result = document.querySelector("#result")
