@@ -1,3 +1,10 @@
+let victor = document.getElementById("victor")
+victor.style.color = "red";
+let playerScore = document.getElementById("playerScore")
+let computerScore = document.getElementById("computerScore")
+let result = document.querySelector("#result")
+let buttons = document.querySelectorAll('button');
+buttons.forEach(button => button.addEventListener('click', eventHandler));
 //creating variables to keep score
 let myScore = 0;
 let pcScore = 0;
@@ -11,6 +18,9 @@ function getComputerChoice() {
         return "PAPER"
     else 
         return "SCISSORS"
+    }
+    function eventHandler(e){
+        game(e);
     }
 //creates a function we can use to decide who wins
 function playRound(player, computer){
@@ -51,21 +61,17 @@ function playRound(player, computer){
 function game(e){
 let computerChoice = getComputerChoice();
 playRound(e.target.id.toUpperCase(), computerChoice)
+console.log(myScore, pcScore)
 if (myScore == 5) {
+buttons.forEach(button => button.removeEventListener('click', eventHandler))
 victor.innerText = "YOU WON! Loading new game...."
 setTimeout(() => location.reload(), 3000)
 }
 else if (pcScore == 5){
+    buttons.forEach(button => button.removeEventListener('click', eventHandler ))
     victor.innerText = "COMPUTER WON! Loading new game..."
     setTimeout(() => location.reload(), 3000)
 }
 }
-//add event listeners
-let victor = document.getElementById("victor")
-victor.style.color = "red";
-let playerScore = document.getElementById("playerScore")
-let computerScore = document.getElementById("computerScore")
-let result = document.querySelector("#result")
-let buttons = document.querySelectorAll('button');
-buttons.forEach(button => button.addEventListener('click', (e) => game(e)));
+
 
